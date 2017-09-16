@@ -1,1 +1,17 @@
-consul-server ansible_host=192.168.99.100 ansible_user=ubuntu ansible_ssh_pass=ubuntu
+consul-server ansible_host=192.168.99.100
+consul-host-1 ansible_host=192.168.99.101
+consul-host-2 ansible_host=192.168.99.102
+
+[servers]
+consul-server
+
+[nodes]
+consul-host-[1:2]
+
+[cluster:children]
+servers
+nodes
+
+[cluster:vars]
+ansible_user=ubuntu
+ansible_ssh_pass=ubuntu
