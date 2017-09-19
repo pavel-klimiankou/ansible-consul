@@ -39,3 +39,16 @@
      template: 
        src: server.init.json.j2
        dest: "{{consul_config_dir}}/init.json"
+
+- hosts: nodes
+
+  tasks:
+
+   - set_fact: consul_server={{ hostvars[inventory_hostname]['groups']['servers'][0] }}
+   - set_fact: consul_server_ip={{ hostvars[consul_server]['ansible_all_ipv4_addresses'][0] }}
+
+   - name: Deploy consul client config
+     become: true
+     template: 
+       src: client.init.json.j2
+       dest: "{{consul_config_dir}}/init.json"
