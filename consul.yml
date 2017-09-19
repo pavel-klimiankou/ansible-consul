@@ -52,3 +52,11 @@
      template: 
        src: client.init.json.j2
        dest: "{{consul_config_dir}}/init.json"
+
+- hosts: cluster
+
+  tasks:
+
+   - name: Ensure consul's running
+     become: true
+     service: name=consul state=started
