@@ -1,8 +1,8 @@
 {
 	"server": true,
 	"ui": true,
-	"advertise_addr": "{{ consul_server_ip }}",
-	"client_addr": "{{ consul_server_ip }}",
+	"advertise_addr": "{{ ansible_host }}",
+	"client_addr": "{{ ansible_host }}",
 	"data_dir": "/tmp/consul",
 	"bootstrap_expect": 1
 }

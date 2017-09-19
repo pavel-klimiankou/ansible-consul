@@ -2,7 +2,6 @@
 
   vars:
     consul_version: 0.9.3
-    consul_config_dir: /etc/systemd/system/consul.d
 
   tasks:
 
@@ -30,3 +29,13 @@
      file: 
        path: "{{ consul_config_dir }}"
        state: directory
+
+- hosts: servers
+
+  tasks:
+
+   - name: Deploy consul server config
+     become: true
+     template: 
+       src: server.init.json.j2
+       dest: "{{consul_config_dir}}/init.json"
