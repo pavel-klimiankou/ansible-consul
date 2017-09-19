@@ -1,8 +1,7 @@
-- hosts: consul-server
+- hosts: cluster
 
   vars:
-    consul_version: 0.9.2
-    consul_server_ip: 192.168.99.100
+    consul_version: 0.9.3
     consul_config_dir: /etc/systemd/system/consul.d
 
   tasks:
@@ -31,13 +30,3 @@
      file: 
        path: "{{ consul_config_dir }}"
        state: directory
-
-   - name: Deploy consul config
-     become: true
-     template: 
-       src: init.json.j2
-       dest: "{{consul_config_dir}}/init.json"
-
-   - name: Ensure consul's running
-     become: true
-     service: name=consul state=started
